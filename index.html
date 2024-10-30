@@ -3,32 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Cherry+Bomb+One&family=Delius&family=Kurale&family=Onest:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playwrite+CL:wght@100..400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <title>Document</title>
 </head>
 <body>
     <div class="blog">
-        <div class="container">
-          <h1 class="logo">my blog</h1>
+        <div class="container"> 
+          <div class="header">
+            <div class="logo">
+              <a href="#"><img class="logo-img" src="/images/krolik.png" alt="logo"></a>
+            </div>
+              <h1 class="title">Wszystko o uszakach</h1>
+          </div>
           <main class="wrapper">
-            <aside aria-label="Primary" class="sidebar">
-              <h2 class="section-title">All posts</h2>
+            <aside aria-label="Primary" class="sidebar posts-list">
+              <h2 class="section-title">co trzeba wiedzieć</h2>
               <ul class="list titles">
-                <li><a href="#article-1" class="active"><span>Article 1</span></a></li>
-                <li><a href="#article-2"><span>Article 2</span></a></li>
-                <li><a href="#article-3"><span>Article 3</span></a></li>
-                <li><a href="#article-4"><span>Article 4</span></a></li>
-                <li><a href="#article-5"><span>Article 5</span></a></li>
-                <li><a href="#article-6"><span>Article 6</span></a></li>
-                <li><a href="#article-7"><span>Article 7</span></a></li>
-                <li><a href="#article-8"><span>Article 8</span></a></li>
-                <li><a href="#article-9"><span>Article 9</span></a></li>
-                <li><a href="#article-10"><span>Article 10</span></a></li>
               </ul>
             </aside>
+            
             <section class="posts">
-              <article class="post active" id="article-1">
-                <h3 class="post-title">Article 1</h3>
+              <article class="post0 active" id="article-0">
+                <h2 class="post-title">Witaj na stronie poświęconej królikom!</h2>
+                <div class="post-content">
+                  <p>
+                    Znajdziesz tu wiele ciekawostek o tych wspaniałych zwierzętach.<br>
+                    Dowiesz się też wszsystkiego co potrzebne, aby zapewnić Twojemu uszakowi odpowiednie warunki i opiekę.
+                  </p>
+                  <div class="image0">
+                    <img src="/images/bunny.jpg" alt="Królik miniaturowy">
+                  </div>
+                </div>
+              </article>
+              <article class="post" id="article-1">
+                <h3 class="post-title">Dlaczego królik ma duże uszy? </h3>
                 <p class="post-author">by Marion Berry</p>
                 <div class="post-content">
                   <p>Duis non dolor efficitur erat interdum fringilla a lobortis dolor. Aenean in massa viverra, pretium augue et, imperdiet diam. Proin varius vitae lectus ut suscipit. Etiam metus lacus, molestie at ante eget, gravida tristique metus. Morbi finibus elit mi, ut aliquam libero tempor eu.</p>
@@ -38,13 +50,13 @@
                 <div class="post-tags">
                   <p><strong>Tags:</strong></p>
                   <ul class="list list-horizontal">
-                    <li><a href="#">design</a></li>
-                    <li><a href="#">tutorials</a></li>
+                    <li><a href="#">anatomia królika</a></li>
+                    <li><a href="#">uszy</a></li>
                   </ul>
                 </div>
               </article>
               <article class="post" id="article-2">
-                <h3 class="post-title">Article 2</h3>
+                <h3 class="post-title">Dlaczego królik tupie?</h3>
                 <p class="post-author">by Theo Tabby</p>
                 <div class="post-content">
                   <p>Phasellus sollicitudin, arcu vel iaculis ullamcorper, quam leo viverra orci, et faucibus quam sapien vel est. Maecenas ac suscipit elit. Nullam interdum, lorem vitae venenatis pulvinar, ex dui malesuada nunc, tempus cursus enim metus vel nulla.</p>
@@ -54,13 +66,13 @@
                 <div class="post-tags">
                   <p><strong>Tags:</strong></p>
                   <ul class="list list-horizontal">
-                    <li><a href="#">news</a></li>
+                    <li><a href="#">zachowanie</a></li>
                     <li><a href="#">code</a></li>
                   </ul>
                 </div>
               </article>
               <article class="post" id="article-3">
-                <h3 class="post-title">Article 3</h3>
+                <h3 class="post-title">Zioła bezpieczne i szkodliwe</h3>
                 <p class="post-author">by George Tuxedo</p>
                 <div class="post-content">
                   <p>Mauris vel pellentesque turpis, ac sodales nisl. Quisque iaculis mi velit, ut convallis tellus accumsan a. Quisque iaculis, nisi et dignissim tincidunt, nisl eros euismod nulla, finibus laoreet erat enim posuere elit.</p>
@@ -77,7 +89,7 @@
                 </div>
               </article>
               <article class="post" id="article-4">
-                <h3 class="post-title">Article 4</h3>
+                <h3 class="post-title">Jak przygotować dom na przybycie puchatego przyjaciela</h3>
                 <p class="post-author">by Kitty Toebean</p>
                 <div class="post-content">
                   <p>Morbi vel cursus nulla, vel varius mauris. Suspendisse sed elit sit amet risus faucibus vestibulum ut sit amet purus. Donec orci est, condimentum ut quam quis, scelerisque fringilla ligula.</p>
@@ -94,7 +106,7 @@
                 </div>
               </article>
               <article class="post" id="article-5">
-                <h3 class="post-title">Article 5</h3>
+                <h3 class="post-title">Dlaczego królik nie jest gryzoniem</h3>
                 <p class="post-author">by Marion Berry</p>
                 <div class="post-content">
                   <p>Suspendisse sem eros, euismod condimentum arcu ac, consequat fermentum orci. Nam convallis lacus nec interdum vestibulum. Vestibulum luctus, quam eu tristique ornare, lorem nibh sodales enim, vitae tempor dolor ante vitae tortor.</p>
@@ -110,7 +122,7 @@
                 </div>
               </article>
               <article class="post" id="article-6">
-                <h3 class="post-title">Article 6</h3>
+                <h3 class="post-title">Dokąd nocą tupta królik</h3>
                 <p class="post-author">by George Tuxedo</p>
                 <div class="post-content">
                   <p>Donec posuere iaculis ante sed hendrerit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque hendrerit neque nec urna tincidunt, quis vehicula dui vulputate. Morbi est sapien, auctor ut lectus eu, placerat viverra lorem.</p>
@@ -126,7 +138,7 @@
                 </div>
               </article>
               <article class="post" id="article-7">
-                <h3 class="post-title">Article 7</h3>
+                <h3 class="post-title">Czym są odgniotki</h3>
                 <p class="post-author">by Kitty Toebean</p>
                 <div class="post-content">
                   <p>Donec eleifend mauris ac nisl fermentum, ac fermentum turpis dignissim. Aliquam diam nisl, imperdiet a varius eget, lobortis sed nisi. Nullam suscipit ipsum sed magna blandit, sed pellentesque urna malesuada.</p>
@@ -142,7 +154,7 @@
                 </div>
               </article>
               <article class="post" id="article-8">
-                <h3 class="post-title">Article 8</h3>
+                <h3 class="post-title">Jak nauczyć królika kuwetowania</h3>
                 <p class="post-author">by Theo Tabby</p>
                 <div class="post-content">
                   <p>Praesent quis imperdiet erat. Curabitur tempor sapien a interdum malesuada. Proin libero erat, sagittis a sollicitudin eget, pulvinar nec risus. Cras et suscipit sem.</p>
@@ -159,7 +171,7 @@
                 </div>
               </article>
               <article class="post" id="article-9">
-                <h3 class="post-title">Article 9</h3>
+                <h3 class="post-title">Dlaczego królik powinien mieć króliczego towarzysza</h3>
                 <p class="post-author">by Marion Berry</p>
                 <div class="post-content">
                   <p>Tam et facilisis purus. Donec vulputate est quis lobortis posuere. Nunc vitae lorem ut odio faucibus pulvinar nec in justo. Ut ut ante ac tellus ornare tempus. Nunc maximus, tortor et dictum convallis, nunc libero posuere leo, scelerisque ultrices arcu sapien ut tellus.</p>
@@ -175,7 +187,7 @@
                 </div>
               </article>
               <article class="post" id="article-10">
-                <h3 class="post-title">Article 10</h3>
+                <h3 class="post-title">Metody zaprzyjaźniania królików</h3>
                 <p class="post-author">by George Tuxedo</p>
                 <div class="post-content">
                   <p>Aliquam erat volutpat. Ut non eleifend lectus. Donec suscipit tellus tempor, ornare dui id, hendrerit neque. Phasellus lacinia laoreet dui in luctus. Sed hendrerit, magna sit amet varius tempor, augue augue scelerisque est, non scelerisque mauris libero eu sapien.</p>
@@ -183,7 +195,7 @@
                   <p>Rhoncus purus nulla, non auctor lacus placerat ut. Aliquam condimentum eget magna ac gravida. Etiam egestas faucibus urna et finibus. Cras vel tellus vel magna suscipit euismod. Maecenas id arcu ante. Duis iaculis scelerisque erat, at ullamcorper arcu consectetur eu. Fusce aliquam diam at arcu pharetra, vel fermentum nunc lobortis.</p>
                 </div>
                 <div class="post-tags">
-                  <p><strong>Tags:</strong></p>
+                  <p><strong>Tagi:</strong></p>
                   <ul class="list list-horizontal">
                     <li><a href="#">code</a></li>
                     <li><a href="#">design</a></li>
@@ -194,34 +206,34 @@
               </article>
             </section>
             <aside aria-labelledby="secondary-nav-heading" class="sidebar">
-              <h2 class="section-title">Tags</h2>
+              <h2 class="section-title">Tagi</h2>
               <ul class="list tags">
-                <li><a href="#">design</a> <span>(6)</span></li>
-                <li><a href="#">code</a> <span>(5)</span></li>
-                <li><a href="#">tutorials</a> <span>(4)</span></li>
-                <li><a href="#">reviews</a> <span>(4)</span></li>
-                <li><a href="#">news</a> <span>(6)</span></li>
+                <li><a href="#">anatomia królika</a> <span>(6)</span></li>
+                <li><a href="#">zachowanie</a> <span>(5)</span></li>
+                <li><a href="#">dieta</a> <span>(4)</span></li>
+                <li><a href="#">bobki</a> <span>(4)</span></li>
+                <li><a href="#">sierść</a> <span>(6)</span></li>
               </ul>
-              <h2 class="section-title">Authors</h2>
+              <h2 class="section-title">Kategorie</h2>
               <ul class="list authors">
                 <li>
                   <a href="#">
-                    <span class="author-name">Kitty Toebean</span>
+                    <span class="author-name">Żywienie</span>
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    <span class="author-name">Theo Tabby</span>
+                    <span class="author-name">Zdrowie</span>
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    <span class="author-name">George Tuxedo</span>
+                    <span class="author-name">Pielęgnacja</span>
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    <span class="author-name">Marion Berry</span>
+                    <span class="author-name">Zabawy</span>
                   </a>
                 </li>
               </ul>
