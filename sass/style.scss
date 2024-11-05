@@ -50,12 +50,10 @@ body {
   margin-left: 10px;
 }
 
-.sidebar {
-  flex: 1 0 0;
-}
+
 
 .posts {
-  flex: 2 0 0;
+ // flex: 2 0 0;
   position: relative;
   padding: 20px;
 }
@@ -68,27 +66,22 @@ body {
   border-radius: 20px;
   a {
     text-decoration: none;
-    font-size: 25px;
+    font-size: 20px;
     color: #636e72;
   }
 }
 
 /* Header */
 
-.header {
-  margin-top: 50px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
+
 
 .logo {
- 
-  padding: 20px 40px;
+  padding: 30px 48px;
   border-radius: 50%;
-  box-shadow: 1px 3px 5px $color-dark;
- 
+  border: 7px inset rgb(255, 123, 0);
+  //box-shadow: 1px 3px 5px $color-dark;
+  width: 200px;
+  height: 200px;
 }
 
 .logo-img {
@@ -104,7 +97,7 @@ body {
   line-height: 1;
   text-align: center;
   padding: 0;
-  margin: 30px 0px 50px 0px;
+  margin: 0;
 }
 
 /* Lists */
@@ -120,11 +113,13 @@ body {
 
 a.active::before {
   content: url("/images/carrot-solid\ \(1\).svg");
+  margin-right: 10px;
 }
 
 .list-horizontal {
   li {
     display: inline-block;
+    margin-right: 15px;
   }
 }
 
@@ -139,13 +134,11 @@ a.active::before {
 /* Post */
 
 .post {
-  //display: none;
   opacity: 0;
   position: absolute;
   width: inherit;
   padding-right: 30px;
   &.active {
-    //display: block;
     transition: opacity 0.5s ;
     opacity: 1;
   }
@@ -181,4 +174,29 @@ a.active::before {
 i.pointer {
   display: inline-block;
   margin-right: 8px;
+}
+
+.up {
+  min-height: 200px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0px;
+
+}
+
+.bottom {
+  min-height: 800px;
+}
+
+.column-aside {
+  flex: 1 0 0;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+}
+
+.column-main {
+  flex: 2 0 0;
 }
