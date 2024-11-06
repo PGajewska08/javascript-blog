@@ -108,15 +108,17 @@ function generateTags(){
       /* dodajemy linki do zmiennej */
       html = html + linkHTML;
       //console.log('pętla ' + html);
+      tagsWraper.innerHTML = html;
       /*KONIEC PĘTLI: dla każdego tagu */
     }
 
     /* Wstawiamy kod html z linkami do wrapera tagów */
-    tagsWraper.innerHTML = html;
+   
     //console.log('tags wraper: ',tagsWraper);
     //console.log(html);
     /* KONIEC PĘTLI: dla każdego artykułu: */
   }
+  
 }
 generateTags();
 
@@ -148,7 +150,7 @@ function tagClickHandler(event){
     /* KONIEC PĘTLI: dla każdego aktywnego liku tagu */
   }
   /* znajdź wszystkie linki tagów z atrybutem href równym stałej href */
-  const linkiTagow = document.querySelectorAll('a.active[href' + href + '"]');
+  const linkiTagow = document.querySelectorAll('[href="' + href + '"]');
 
   /* POCZĄTEK PĘTLI: dla każdego znalezionego linku tagu */
   for (let linkTagu of linkiTagow){
@@ -165,6 +167,7 @@ function tagClickHandler(event){
 function addClickListenersToTags(){
   /* znajdź wszystkie linki tagów */
   const tagLinks = document.querySelectorAll('a[href^="#tag-"]');
+
   console.log(tagLinks);
   /* POCZĄTEK PĘTLI: dla każdego linku */
   for (let tagLink of tagLinks){
@@ -173,5 +176,4 @@ function addClickListenersToTags(){
   /* KONIEC PĘTLI: dla każdego linku */
   }
 }
-
 addClickListenersToTags();

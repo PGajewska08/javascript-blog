@@ -50,8 +50,6 @@ body {
   margin-left: 10px;
 }
 
-
-
 .posts {
  // flex: 2 0 0;
   position: relative;
@@ -111,7 +109,7 @@ body {
   }
 }
 
-a.active::before {
+.titles a.active::before {
   content: url("/images/carrot-solid\ \(1\).svg");
   margin-right: 10px;
 }
@@ -134,13 +132,15 @@ a.active::before {
 /* Post */
 
 .post {
-  opacity: 0;
+  display: none;
+  //opacity: 0;
   position: absolute;
   width: inherit;
   padding-right: 30px;
   &.active {
-    transition: opacity 0.5s ;
-    opacity: 1;
+    //transition: opacity 0.5s ;
+    //opacity: 1;
+    display: block;
   }
 }
 
