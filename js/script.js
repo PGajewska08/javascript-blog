@@ -3,7 +3,8 @@
 const optArticleSelector = '.post', // artykuł
   optTitleSelector = '.post-title', // tytuł artykułu
   optTitleListSelector = '.titles', // lista tytułów
-  optArticleTagsSelector = '.post-tags .list'; // lista tagów artykułu
+  optArticleTagsSelector = '.post-tags .list', // lista tagów artykułu
+  optArticleCategorySelector = 'p.post-category'; // lista tagów artykułu
 
 //FUNKCJA PO KLIKNIĘCIU W TYTUŁ ARTYKUŁU - wyświetlenie właściwego artykułu
 function titleClickHandler(event){
@@ -73,7 +74,7 @@ function generateTitleLinks(customSelector = ''){
 
   //dla wszystkich linków z tytułami
   const links = document.querySelectorAll('.titles a');
-  console.log(links);
+  //console.log(links);
   for(let link of links){
     link.addEventListener('click', titleClickHandler); // dodajemy nasłuchiwanie kliknięcia, po kliknięciu wywoła się funkcja 
   }
@@ -129,7 +130,7 @@ function tagClickHandler(event){
 
   /* stała dla elementu "this" - kliknięty element*/
   const clickedElement = this;
-  console.log('kliknięty element: ',clickedElement);  
+ // console.log('kliknięty element: ',clickedElement);  
   /* stała "href" przechowująca atrybut "href" klikniętego elementu */
   const href = clickedElement.getAttribute('href');
   //console.log('kliknięty tag href: '+href);
@@ -137,7 +138,7 @@ function tagClickHandler(event){
   /* stała "tag" - wyjmujemy tag ze stałej "href" */
   // sposób mój : const tag = href.slice(4);
   const tag = href.replace('#tag-', '');
-  console.log(tag);
+  //console.log(tag);
 
   /* znajdź wszystkie linki tagów z klasą active */
   const activeTagLinks = document.querySelectorAll('.post-tags a.active');
@@ -168,7 +169,7 @@ function addClickListenersToTags(){
   /* znajdź wszystkie linki tagów */
   const tagLinks = document.querySelectorAll('a[href^="#tag-"]');
 
-  console.log(tagLinks);
+  //console.log(tagLinks);
   /* POCZĄTEK PĘTLI: dla każdego linku */
   for (let tagLink of tagLinks){
     /* dodaj NASŁUCHIWANIE dla linku */
@@ -177,3 +178,56 @@ function addClickListenersToTags(){
   }
 }
 addClickListenersToTags();
+
+
+
+
+
+function generateCategories(){
+  const articles = document.querySelectorAll(optArticleSelector);
+  for (let article of articles) {
+    const categoryWraper = article.querySelector(optArticleCategorySelector);
+    let html = '';
+    const articleCategory = article.getAttribute('data-category');
+    //działaconsole.log(articleCategory);
+    let linkHTML = 'Kategoria: <a href="#category-'+ articleCategory +'">' + articleCategory + '</a>';
+    //działaconsole.log(linkHTML);
+    html = html + linkHTML;
+    categoryWraper.innerHTML = html;
+  }
+}
+generateCategories();
+
+function categoryClickHandler(event){
+  event.preventDefault();
+  const clickedElement = this;
+  //działaconsole.log(clickedElement);
+  const href = clickedElement.getAttribute('href');
+  const category = href.replace('#category-', '');
+  const activeCAtegoryLinks = document.querySelectorAll('.post-category a.active');
+  for (let activeCategoryLink of activeCAtegoryLinks){
+    /* usuń klasę active */
+    activeCategoryLink.classList.remove('active');
+    /* KONIEC PĘTLI: dla każdego aktywnego liku tagu */
+  }
+  const linkiKategorii = document.querySelectorAll('[href="' + href + '"]');
+  for (let linkKategorii of linkiKategorii){
+    /* add class active */
+    linkKategorii.classList.add('active');
+    /* KONIEC PĘTLI: dla każdego znalezionego linku tagu */
+
+  }
+  generateTitleLinks('[data-category="' + category + '"');
+}
+
+function addClickListenerToCategories(){
+  const categoryLinks = document.querySelectorAll('a[href^="#category-"]');
+  //console.log(categoryLinks);
+  for (let catrgoryLink of categoryLinks){
+    //działaconsole.log(catrgoryLink);
+    /* dodaj NASŁUCHIWANIE dla linku */
+    catrgoryLink.addEventListener('click', categoryClickHandler);
+  /* KONIEC PĘTLI: dla każdego linku */
+  }
+}
+addClickListenerToCategories();
