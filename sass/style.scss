@@ -50,11 +50,37 @@ body {
   margin-left: 10px;
 }
 
+.up {
+  min-height: 200px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0px;
+
+}
+
+.bottom {
+  min-height: 800px;
+}
+
+.column-aside {
+  flex: 1 0 0;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+}
+
+.column-main {
+  flex: 2 0 0;
+}
+
 .posts {
  // flex: 2 0 0;
   position: relative;
   padding: 20px;
 }
+
 
 .sidebar, .posts {
   background: $color-light;
@@ -70,9 +96,6 @@ body {
 }
 
 /* Header */
-
-
-
 .logo {
   padding: 30px 48px;
   border-radius: 50%;
@@ -99,14 +122,15 @@ body {
 }
 
 /* Lists */
-
 .list {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  .active {
-    font-weight: bold;
-  }
+  
+}
+
+.posts-list .active {
+  font-weight: bold;
 }
 
 .titles a.active::before {
@@ -121,16 +145,7 @@ body {
   }
 }
 
-/* Authors */
-
-.authors {
-  li {
-    margin-bottom: 12px;
-  }
-}
-
 /* Post */
-
 .post {
   display: none;
   //opacity: 0;
@@ -171,32 +186,46 @@ body {
   }
 } 
 
-i.pointer {
-  display: inline-block;
-  margin-right: 8px;
+// tags classes
+a.tag-size-1 {
+  font-size: 90%;
+  color: red;
+  .active {
+    font-weight: normal;
+  }
+  
 }
 
-.up {
-  min-height: 200px;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 20px 0px;
-
+a.tag-size-2 {
+  font-size: 120%;
+  color: blue;
+  .active {
+    font-weight: normal;
+  }
 }
 
-.bottom {
-  min-height: 800px;
+a.tag-size-3 {
+  font-size: 150%;
+  color: rgb(49, 83, 9);
+  .active {
+    font-weight: normal;
+  }
 }
 
-.column-aside {
-  flex: 1 0 0;
-  margin: 0;
-  padding: 0;
-  justify-content: center;
+a.tag-size-4 {
+  font-size: 155%;
+  color: rgb(73, 6, 87);
+  .active {
+    font-weight: normal;
+  }
 }
 
-.column-main {
-  flex: 2 0 0;
+a.tag-size-5 {
+  font-size: 160%;
+  color: rgb(104, 57, 3);
+  font-weight: bold;
+  .active {
+    font-weight: normal;
+  }
 }
+

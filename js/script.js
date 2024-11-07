@@ -1,10 +1,25 @@
 'use strict';
 // stałe do znajdowania elementów 
-const optArticleSelector = '.post', // artykuł
-  optTitleSelector = '.post-title', // tytuł artykułu
-  optTitleListSelector = '.titles', // lista tytułów
-  optArticleTagsSelector = '.post-tags .list', // lista tagów artykułu
-  optArticleCategorySelector = 'p.post-category'; // lista tagów artykułu
+const opts = {
+  articleSelector : '.post', // artykuł
+  titleSelector : '.post-title', // tytuł artykułu
+  titleListSelector : '.titles', // lista tytułów
+  articleTagsSelector : '.post-tags .list', // lista tagów artykułu
+  articleCategorySelector : 'p.post-category', //
+  tagsListSelector : '.tags.list',
+  cloudClassCount : 5, //
+  cloudClassPrefix : 'tag-size-',
+  categoriesListSelector : '.categories'
+};
+//const optArticleSelector = '.post', // artykuł
+//opts.titleSelector = '.post-title', // tytuł artykułu
+//const //opts.titleListSelector = '.titles', // lista tytułów
+  //optArticleTagsSelector = '.post-tags .list', // lista tagów artykułu
+  //optArticleCategorySelector = 'p.post-category', // 
+  //optTagsListSelector = '.tags.list', // 
+  //optCloudClassCount = 5, // 
+  //optCloudClassPrefix = 'tag-size-', // 
+  //optCategoriesListSelector = '.categories'; // 
 
 //FUNKCJA PO KLIKNIĘCIU W TYTUŁ ARTYKUŁU - wyświetlenie właściwego artykułu
 function titleClickHandler(event){
@@ -46,11 +61,11 @@ function titleClickHandler(event){
 // FUNKCJA GENEROWANIE LINKÓW DLA TYTUŁÓW ARTYKUŁÓW - domyślnie wszystkich, po podaniu argumentu generowanie linków z danym tagiem
 function generateTitleLinks(customSelector = ''){
   /* czyszczenie miejsca, gdzie będą wyświetlone linki z tytułami */
-  const titleList = document.querySelector(optTitleListSelector);
+  const titleList = document.querySelector(opts.titleListSelector);
   titleList.innerHTML = '';
 
   /* znajdź wszystkie artykuły i zapisz do zmiennej */
-  const articles = document.querySelectorAll(optArticleSelector + customSelector); // lista artykułów
+  const articles = document.querySelectorAll(opts.articleSelector + customSelector); // lista artykułów
   let html = '';
 
   /* dla każdego artykułu */
@@ -60,7 +75,7 @@ function generateTitleLinks(customSelector = ''){
 
     /* znajdź element html z tytułem */
     /* pobierz tetkst (tytuł artykułu) z elementu */
-    const articleTitle = article.querySelector(optTitleSelector).innerHTML;
+    const articleTitle = article.querySelector(opts.titleSelector).innerHTML;
 
     /* stwórz kod html dla linku */
     const linkHTML = '<li><a class="links" href="#' + articleId + '"><span>' + articleTitle + '</span></a><hr></li>'; // tytuły artykułów jako linki, elementy listy
@@ -81,15 +96,42 @@ function generateTitleLinks(customSelector = ''){
 }
 generateTitleLinks();
 
+function calculateTagsParams(tags){
+  const params = {
+    max: 0,
+    min: 999999
+  };
+  for (let tag in tags){
+    if(tags[tag] < params.min){
+      params.min = tags[tag];
+    }
+    if(tags[tag] > params.max){
+      params.max = tags[tag];
+    }
+    //console.log(tag + ' is used ' + tags[tag] + ' times');
+  }
+  return params;
+}
+
+function calculateTagClass(count, params){
+  const normalizedCount = count - params.min;
+  const normalizedMax = params.max - params.min;
+  const percentage = normalizedCount / normalizedMax;
+  const classNumber = Math.floor (percentage * (opts.cloudClassCount - 1) +1);
+  return (opts.cloudClassPrefix + classNumber);
+}
+
 // FUNKCJA WYPISUJĄCA TAGI POD ARTYKUŁEM
 function generateTags(){
+  /* [NEW] create a new variable allTags with an empty object */
+  let allTags = {};
   /* znajdź wszystkie artykuły */
-  const articles = document.querySelectorAll(optArticleSelector);
+  const articles = document.querySelectorAll(opts.articleSelector);
 
   /* POCZĄTEK PĘTLI: dla każdego artykułu: */
   for (let article of articles) {
     /* znajdź miejsce wypisania tagów pod artykułem */
-    const tagsWraper = article.querySelector(optArticleTagsSelector); // znajdujemy wraper tagów nie w dokumencie, tylko w kazdym artykule!
+    const tagsWraper = article.querySelector(opts.articleTagsSelector); // znajdujemy wraper tagów nie w dokumencie, tylko w kazdym artykule!
 
     /* zmienna html z pustym stringiem */
     let html = '';
@@ -110,15 +152,35 @@ function generateTags(){
       html = html + linkHTML;
       //console.log('pętla ' + html);
       tagsWraper.innerHTML = html;
+      /* [NEW] check if this link is NOT already in allTags */
+      if(!allTags.hasOwnProperty(tag)){
+        /* add tag to allTags object */
+        allTags[tag] = 1;
+      } else {
+        allTags[tag]++;
+      }
       /*KONIEC PĘTLI: dla każdego tagu */
     }
 
     /* Wstawiamy kod html z linkami do wrapera tagów */
-   
-    //console.log('tags wraper: ',tagsWraper);
-    //console.log(html);
     /* KONIEC PĘTLI: dla każdego artykułu: */
   }
+  /* [NEW] find list of tags in right column */
+  const tagList = document.querySelector(opts.tagsListSelector);
+  /* [NEW] create variable for all links HTML code */
+  const tagsParams = calculateTagsParams(allTags);
+  //console.log('Tags params: ',tagsParams);
+  let allTagsHTML = '';
+  /* [NEW] START LOOP: for each tag in allTags: */
+  for(let tag in allTags){
+    /* [NEW] generate code of a link and add it to allTagsHMTL */
+    allTagsHTML += '<a class="'+ calculateTagClass(allTags[tag],tagsParams)+'" href="#tag-' + tag +'">' + tag + ' </a>';
+  }
+  /* [NEW] END LOOP: for each tag in allTags: */
+  /* [NEW] add html from allTagsHTML to tagList */
+  tagList.innerHTML = allTagsHTML;
+  //tagList.innerHTML = allTags.join(' ');
+  // console.log(allTags);
   
 }
 generateTags();
@@ -179,14 +241,11 @@ function addClickListenersToTags(){
 }
 addClickListenersToTags();
 
-
-
-
-
 function generateCategories(){
-  const articles = document.querySelectorAll(optArticleSelector);
+  let allCategories = [];
+  const articles = document.querySelectorAll(opts.articleSelector);
   for (let article of articles) {
-    const categoryWraper = article.querySelector(optArticleCategorySelector);
+    const categoryWraper = article.querySelector(opts.articleCategorySelector);
     let html = '';
     const articleCategory = article.getAttribute('data-category');
     //działaconsole.log(articleCategory);
@@ -194,7 +253,24 @@ function generateCategories(){
     //działaconsole.log(linkHTML);
     html = html + linkHTML;
     categoryWraper.innerHTML = html;
+
+    if(allCategories.indexOf(articleCategory) == -1){
+      /* add tag to allTags object */
+      allCategories.push(articleCategory);
+    } 
   }
+  console.log(allCategories);
+  const caltegoriesList = document.querySelector(opts.categoriesListSelector);
+  console.log(caltegoriesList);
+  let allCategoriesHTML = '';
+  /* [NEW] START LOOP: for each tag in allTags: */
+  for(let articleCategory of allCategories){
+    /* [NEW] generate code of a link and add it to allTagsHMTL */
+    allCategoriesHTML += '<li><a href="#category-' + articleCategory +'">' + articleCategory + ' </a></li>';
+  }
+  /* [NEW] END LOOP: for each tag in allTags: */
+  /* [NEW] add html from allTagsHTML to tagList */
+  caltegoriesList.innerHTML = allCategoriesHTML;
 }
 generateCategories();
 
