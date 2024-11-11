@@ -199,6 +199,29 @@
           </main>
         </div>
       </div>
+      <script id="template-article-link" type="text/x-handlebars-template">
+        <li><a a class="links" href="#{{ id }}"><span>{{ title }}</span></a><hr></li>
+      </script>
+      <script id="template-tag-link" type="text/x-handlebars-template">
+        <li><a href="#tag-{{tag}}">{{tag}}</a></li>
+      </script>
+      <script id="template-category-link" type="text/x-handlebars-template">
+        <span>Kategoria: <a href="#category-{{category}}">{{category}}</a></span>
+      </script>
+      <script id="template-tag-cloud-link" type="text/x-handlebars-template">
+        {{#each tags}}
+        <a href="#tag-{{tag}}" class=" tag {{className}}">{{ tag }} </a>
+        {{/each}}
+      </script>
+      <script id="template-categories-list-link" type="text/x-handlebars-template">
+        <ul class="categories">
+          {{#each categories}}
+          <li class="list"><a href="#category-{{category}}">{{category}}</a></li>
+          {{/each}}
+        </ul>
+        
+      </script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
       <script src="js/script.js"></script>
 </body>
 </html>

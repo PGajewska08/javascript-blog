@@ -1,3 +1,10 @@
+const templates = {
+  articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
+  tagLink: Handlebars.compile(document.querySelector('#template-tag-link').innerHTML),
+  categoryLink: Handlebars.compile(document.querySelector('#template-category-link').innerHTML),
+  tagCloudLink: Handlebars.compile(document.querySelector('#template-tag-cloud-link').innerHTML),
+  categoriesListLink: Handlebars.compile(document.querySelector('#template-categories-list-link').innerHTML)
+}
 'use strict';
 // stałe do znajdowania elementów 
 const opts = {
@@ -20,6 +27,9 @@ const opts = {
   //optCloudClassCount = 5, // 
   //optCloudClassPrefix = 'tag-size-', // 
   //optCategoriesListSelector = '.categories'; // 
+
+  ////////////////////////////////////////////////////////////////////////////
+// ARTYKUŁY
 
 //FUNKCJA PO KLIKNIĘCIU W TYTUŁ ARTYKUŁU - wyświetlenie właściwego artykułu
 function titleClickHandler(event){
@@ -78,7 +88,9 @@ function generateTitleLinks(customSelector = ''){
     const articleTitle = article.querySelector(opts.titleSelector).innerHTML;
 
     /* stwórz kod html dla linku */
-    const linkHTML = '<li><a class="links" href="#' + articleId + '"><span>' + articleTitle + '</span></a><hr></li>'; // tytuły artykułów jako linki, elementy listy
+    const linkHTMLData = {id: articleId, title: articleTitle};
+    const linkHTML = templates.articleLink(linkHTMLData);
+    //const linkHTML = '<li><a class="links" href="#' + articleId + '"><span>' + articleTitle + '</span></a><hr></li>'; // tytuły artykułów jako linki, elementy listy
 
     /* wstaw link do zmiennej - dodajemy każdy link w pętli */
     html = html + linkHTML;
@@ -96,6 +108,9 @@ function generateTitleLinks(customSelector = ''){
 }
 generateTitleLinks();
 
+
+//////////////////////////////////////////////////////////////////////////////
+// TAGI
 function calculateTagsParams(tags){
   const params = {
     max: 0,
@@ -146,7 +161,9 @@ function generateTags(){
     for (let tag of articleTagsArray) {
       //console.log('tag: ',tag);
       /* tworzymy html z linkiem dla każdego tagu*/
-      let linkHTML = '<li><a href="#tag-' + tag + '">' + tag + '</a></li>';
+      const linkHTMLData = {tag: tag};
+      const linkHTML = templates.tagLink(linkHTMLData);
+      //let linkHTML = '<li><a href="#tag-' + tag + '">' + tag + '</a></li>';
 
       /* dodajemy linki do zmiennej */
       html = html + linkHTML;
@@ -170,15 +187,23 @@ function generateTags(){
   /* [NEW] create variable for all links HTML code */
   const tagsParams = calculateTagsParams(allTags);
   //console.log('Tags params: ',tagsParams);
-  let allTagsHTML = '';
+  const allTagsData = {tags: []};
+  //let allTagsHTML = '';
   /* [NEW] START LOOP: for each tag in allTags: */
   for(let tag in allTags){
     /* [NEW] generate code of a link and add it to allTagsHMTL */
-    allTagsHTML += '<a class="'+ calculateTagClass(allTags[tag],tagsParams)+'" href="#tag-' + tag +'">' + tag + ' </a>';
+    allTagsData.tags.push({
+      tag: tag,
+      count: allTags[tag],
+      className: calculateTagClass(allTags[tag], tagsParams)
+    });
+    //allTagsHTML += '<a class="'+ calculateTagClass(allTags[tag],tagsParams)+'" href="#tag-' + tag +'">' + tag + ' </a>';
   }
   /* [NEW] END LOOP: for each tag in allTags: */
   /* [NEW] add html from allTagsHTML to tagList */
-  tagList.innerHTML = allTagsHTML;
+  tagList.innerHTML = templates.tagCloudLink(allTagsData);
+  //console.log(allTagsData);
+  //tagList.innerHTML = allTagsHTML;
   //tagList.innerHTML = allTags.join(' ');
   // console.log(allTags);
   
@@ -241,6 +266,9 @@ function addClickListenersToTags(){
 }
 addClickListenersToTags();
 
+
+//////////////////////////////////////////////////////////////////////////////
+// KATEGORIE
 function generateCategories(){
   let allCategories = [];
   const articles = document.querySelectorAll(opts.articleSelector);
@@ -248,9 +276,11 @@ function generateCategories(){
     const categoryWraper = article.querySelector(opts.articleCategorySelector);
     let html = '';
     const articleCategory = article.getAttribute('data-category');
-    //działaconsole.log(articleCategory);
-    let linkHTML = 'Kategoria: <a href="#category-'+ articleCategory +'">' + articleCategory + '</a>';
-    //działaconsole.log(linkHTML);
+    
+    const linkHTMLData = {category: articleCategory};
+    const linkHTML = templates.categoryLink(linkHTMLData);
+    //let linkHTML = 'Kategoria: <a href="#category-'+ articleCategory +'">' + articleCategory + '</a>';
+    
     html = html + linkHTML;
     categoryWraper.innerHTML = html;
 
@@ -259,18 +289,24 @@ function generateCategories(){
       allCategories.push(articleCategory);
     } 
   }
-  console.log(allCategories);
+  //console.log(allCategories);
   const caltegoriesList = document.querySelector(opts.categoriesListSelector);
-  console.log(caltegoriesList);
-  let allCategoriesHTML = '';
+  //console.log(caltegoriesList);
+  const allCategoriesData = {categories: []};
+  //let allCategoriesHTML = '';
   /* [NEW] START LOOP: for each tag in allTags: */
   for(let articleCategory of allCategories){
     /* [NEW] generate code of a link and add it to allTagsHMTL */
-    allCategoriesHTML += '<li><a href="#category-' + articleCategory +'">' + articleCategory + ' </a></li>';
+    allCategoriesData.categories.push({
+      category: articleCategory
+    });
+   // allCategoriesHTML += '<li><a href="#category-' + articleCategory +'">' + articleCategory + ' </a></li>';
   }
   /* [NEW] END LOOP: for each tag in allTags: */
   /* [NEW] add html from allTagsHTML to tagList */
-  caltegoriesList.innerHTML = allCategoriesHTML;
+  caltegoriesList.innerHTML = templates.categoriesListLink(allCategoriesData);
+  //caltegoriesList.innerHTML = allCategoriesHTML;
+  //console.log(allCategoriesData);
 }
 generateCategories();
 
